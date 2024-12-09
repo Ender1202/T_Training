@@ -1,0 +1,45 @@
+﻿@model HandsOnHelperMethods.Models.Employee
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @using(Html.BeginForm())
+            {
+                <table class="table">
+                    <tr>
+                        <td>Id</td>
+                        <td>@Html.EditorFor(m=>m.Id)</td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td>@Html.TextBoxFor(m => m.Name, null, new {@class=""})</td>
+                    </tr>
+                    <tr>
+                        <td>Designation</td>
+                        <td>
+                            @Html.DropDownListFor(m=>m.Designation,
+                           new SelectList(new string[] {"Programmer","Sr Progammer","TeamLead"}))
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>JoinDate</td>
+                        <td>
+                            @Html.EditorFor(m=>m.JoinDate)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Salary</td>
+                        <td>@Html.EditorFor(m=>m.Salary)</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                            <input type="reset" value="Reset" class="btn btn-info" />
+                        </td>
+                    </tr>
+                </table>
+            }
+</div>
+

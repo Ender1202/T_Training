@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div> 
+        @using(Html.BeginForm("Validate","Authenticate","POST"))
+            {
+                    <table>
+                        <tr>
+                            <td>UserName</td>
+                            <td>
+                                @Html.TextBox("Uname",null,new {})
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Password</td>
+                            <td>
+                                @Html.Password("Pwd")
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input type="submit" value="SingIn" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                @ViewBag.Error
+                            </td>
+                        </tr>
+                    </table>
+            }
+    </div>
+</body>
+</html>

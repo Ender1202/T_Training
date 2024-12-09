@@ -1,0 +1,44 @@
+﻿
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>GetFlowers</title>
+</head>
+<body>
+	<div>
+		@{
+			/* Convert object data to list use as conversion*/
+			List<string> list = ViewData["flowers"] as List<string>;
+			foreach (var item in list)
+			{
+				<h3>@item</h3>
+			}
+		}
+		<hr />
+		<ol>
+			@foreach (var item in ViewData["flowers"] as List<string>)
+			{
+				<li>@item</li>
+			}
+		</ol>
+		<hr />
+		<table border="1">
+			<tr>
+				<th>Flowers</th>
+			</tr>
+			@foreach (var item in ViewData["flowers"] as List<string>)
+			{
+				<tr>
+					<td>@item</td>
+				</tr>
+			}
+		</table>
+	</div>
+</body>
+</html>

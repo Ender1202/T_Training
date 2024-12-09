@@ -1,0 +1,31 @@
+﻿@model HandsOnMVCUsingModels.Models.Product
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Show</title>
+</head>
+<body>
+	<div>
+		@if (Model != null)
+		{
+			<pre>
+	Id:@Model.Id
+	Name:@Model.Name
+	Description:@Model.Description
+	Price:@Model.Price
+	<a href="http://localhost:56086/Product/Index">Back</a>
+</pre>
+		}
+		else
+			{
+				<h3>Invalid Id</h3>
+			}
+	</div>
+</body>
+</html>

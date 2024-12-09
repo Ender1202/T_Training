@@ -1,0 +1,39 @@
+﻿@model List<HandsOnMVCUsingModels.Models.Product>
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Index</title>
+</head>
+<body>
+	<div>
+		<table border="1">
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Descrption</th>
+				<th>Price</th>
+			</tr>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.Id</td>
+					<td>@item.Name</td>
+					<td>@item.Description</td>
+					<td>@item.Price</td>
+					<td>
+						<a href="http://localhost:56086/Product/Details?id=@item.Id">Details</a>
+						<a href="http://localhost:56086/Product/Edit?id=@item.Id">Edit</a>
+						<a href="http://localhost:56086/Product/Delete?id=@item.Id">Delete</a>
+					</td>
+				</tr>
+			}
+		</table>
+	</div>
+</body>
+</html>

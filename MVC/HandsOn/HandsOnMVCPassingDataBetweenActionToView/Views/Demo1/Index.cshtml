@@ -1,0 +1,39 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        <h2>@ViewBag.Message</h2>
+        <ul>
+            @foreach(var item in ViewBag.Cities)
+            {
+                <li>@item</li>
+            }
+        </ul>
+        <hr />
+        @{ 
+            List<string> list = ViewBag.Cities;
+				<table border="1">
+					<tr>
+						<td>City</td>
+					</tr>
+					@foreach (var item in list)
+					{
+						<tr>
+                            <td>@item</td>
+                        </tr>
+					}
+				</table>
+        }
+    </div>
+</body>
+</html>

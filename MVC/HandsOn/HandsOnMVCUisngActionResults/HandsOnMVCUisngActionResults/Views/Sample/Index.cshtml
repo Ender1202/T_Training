@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@Scripts.Render("~/bundles/jquery")
+<script>
+
+    $(document).ready(function () {
+        $.get("/Sample/GetFlowers", null, function (data)
+        {
+            $.each(data, function (i, v) {
+                $("#list1").append("<li>"+v+"</li>")
+
+            });
+        })
+    });
+</script>
+<h2>Index</h2>
+<h1>Today's Date And Time:@DateTime.Now</h1>
+<h1 id="h1" class="text-info">
+
+</h1>
+<ul id="list1">
+
+</ul>

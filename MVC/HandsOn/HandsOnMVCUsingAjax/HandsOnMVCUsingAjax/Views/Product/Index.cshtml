@@ -1,0 +1,166 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Scripts.Render("~/bundles/jquery", "~/bundles/bootstrap")
+@Styles.Render("~/Content/css")
+<script>
+    function GetAll()
+    {
+        $('#list').append('<tr><td>PID</td><td>Pname</td><td>Price</td><td>Stock</td></tr>')
+        $.ajax({
+            type: "GET",
+            url: "GetAll",
+            dataType: "json",
+            success: function (data)
+            {
+                $.each(data, function (i, obj)
+                {
+                    var row = '<tr><td>' + obj.Pid + '</td><td>' + obj.Pname + '</td><td>' + obj.Price + '</td><td>' + obj.Stock + '</td></tr>';
+                    $('#list').append(row);
+                })
+            },
+            error: function (xhr)
+            {
+                alert("error Occured")
+                console.log(xhr.error)
+            }
+        })
+    }
+    $(document).ready(function () {
+        GetAll()
+        $("#searchbtn").click(function () {
+            let Id = $('#Pid').val();
+            $.ajax({
+                type: "GET",
+                url: "GetById/" + Id,
+                dataType: "json",
+                success: function (data) {
+                   
+                    if (data == null) {
+                        alert("Invalid Id");
+                    }
+                    else {
+                        $("#Pname").val(data.Pname);
+                        $("#Price").val(data.Price);
+                        $("#Stock").val(data.Stock);
+                    }
+                },
+                error: function (xhr) {
+                    alert("error Occured")
+                    console.log(xhr.error)
+                }
+
+            });
+        });
+        $('#addbtn').click(function () {
+            let pid = $('#Pid').val();
+            let pname = $('#Pname').val();
+            let price = $('#Price').val();
+            let stock = $('#Stock').val();
+            var data = { Pid: pid, Pname: pname, Price: price, Stock: stock };
+            $.ajax({
+                type: "POST",
+                data: data,
+                dataType: 'json',
+                url: 'Add',
+                success: function (data) {
+                    $('#list').html('');
+                    GetAll();
+                   // alert(data);
+                },
+                error: function (xhr) {
+                    alert("error Occured")
+                    console.log(xhr.error)
+                }
+
+            })
+        });
+        $('#updatebtn').click(function () {
+            let pid = $('#Pid').val();
+            let pname = $('#Pname').val();
+            let price = $('#Price').val();
+            let stock = $('#Stock').val();
+            var data = { Pid: pid, Pname: pname, Price: price, Stock: stock };
+            $.ajax({
+                type: "POST",
+                data: data,
+                dataType: 'json',
+                url: 'Update',
+                success: function (data) {
+                    $('#list').html('');
+                    GetAll();
+                    // alert(data);
+                },
+                error: function (xhr) {
+                    alert("error Occured")
+                    console.log(xhr.error)
+                }
+
+            })
+        });
+        $("#deletebtn").click(function () {
+            let Id = $('#Pid').val();
+            $.ajax({
+                type: "POST",
+                url: "Delete/" + Id,
+                dataType: "json",
+                success: function (data) {
+
+                    $('#list').html('');
+                    GetAll();
+                },
+                error: function (xhr) {
+                    alert("error Occured")
+                    console.log(xhr.error)
+                }
+
+            });
+        });
+    });
+</script>
+<style>
+    td
+    {
+       font-size:medium;
+    }
+</style>
+
+<h2>All Product Manips</h2>
+<div class="container">
+    <div class="jumbotron">
+        <div class="container">
+            <table>
+                <tr>
+                    <td>ID</td>
+                    <td>@Html.TextBox("Pid",null,null,new { @class="form-control"})</td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>@Html.TextBox("Pname", null, null, new { @class = "form-control" })</td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td>@Html.TextBox("Price", null, null, new { @class = "form-control" })</td>
+                </tr>
+                <tr>
+                    <td>Stock</td>
+                    <td>@Html.TextBox("Stock", null, null, new { @class = "form-control" })</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button id="searchbtn" class="btn btn-info">Search</button>
+                        <button id="addbtn" class="btn btn-info">New</button>
+                        <button id="updatebtn" class="btn btn-info">Edit</button>
+                        <button id="deletebtn" class="btn btn-info">Delete</button>
+                    </td>
+                </tr>
+            </table><br />
+            <table id="list" class="table table-bordered">
+
+            </table>
+        </div>
+    </div>
+</div>
+

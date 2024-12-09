@@ -1,0 +1,14 @@
+1.Create Asp.Net  WebAPI Project.
+2.Create a Model Movie(MovieId,MovieName,Lang,RealeseYear,Actor,SubActors,Director) and generate table in the backend using entity framework code first 
+3.Create IMovieRepositroy Interface and add the following Functions
+  a.AddMovie
+  b.GetAllMovies
+  c.GetMovieByName
+  d.GetMoviesByYear
+  e.GetMoviesByActor
+  f.GetMoviesByDirector
+  g.EditMovie()
+  h.DeleteMovie
+ 4.Implement IMovieRepository to MovieRepository class then implement all the fuctions
+ 5.Create Movie Controllers and defind action methods to invoke MovieRepositroy functions
+ 6.Test the Movie Controller Actions using Postman
