@@ -1,0 +1,51 @@
+﻿@model List<FileUploadDownload.Models.FileUpload>
+
+@{
+    ViewBag.Title = "File Upload & Download";
+}
+
+@using (Html.BeginForm("Index", "Files", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-10">
+            <h2>File Upload</h2>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">Upload Image</label>
+                <div class="col-md-10">
+                    <input type="file" id="files" name="files" class="form-control" required="required"><br />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Upload" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-10">
+        <h2>Uploaded File Details</h2>
+        <div class="form-group">
+          
+            </div>
+            @if (Model!=null)
+            {
+            foreach (var item in Model)
+            {
+				<img src="~/Files/DownloadFile?filePath=@item.FileUrl" style="width: 150px; height: 150px" title="Download" />
+            }
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
